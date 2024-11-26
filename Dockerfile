@@ -122,6 +122,8 @@ RUN \
 ADD --chown=wso2carbon:wso2 https://repo1.maven.org/maven2/dnsjava/dnsjava/${DNS_JAVA_VERSION}/dnsjava-${DNS_JAVA_VERSION}.jar ${WSO2_SERVER_HOME}/repository/components/lib
 ADD --chown=wso2carbon:wso2 http://maven.wso2.org/nexus/content/repositories/releases/org/wso2/carbon/kubernetes/artifacts/kubernetes-membership-scheme/${K8S_MEMBERSHIP_SCHEME_VERSION}/kubernetes-membership-scheme-${K8S_MEMBERSHIP_SCHEME_VERSION}.jar ${WSO2_SERVER_HOME}/repository/components/dropins
 
+COPY  --chown=wso2carbon:wso2 postgresql-42.7.4.jar ${WSO2_SERVER_HOME}/repository/components/lib
+
 # Set the user and work directory.
 USER ${USER_ID}
 WORKDIR ${USER_HOME}
