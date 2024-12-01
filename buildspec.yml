@@ -1,0 +1,18 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 302263080987.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...          
+      - docker build -t wso2is-postgresql .
+      - docker tag wso2is-postgresql:latest 302263080987.dkr.ecr.us-east-1.amazonaws.com/wso2is-postgresql:latestpipe
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push 302263080987.dkr.ecr.us-east-1.amazonaws.com/wso2is-postgresql:latestpipe
